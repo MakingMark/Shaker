@@ -1,0 +1,11 @@
+[
+  {
+    "activa": false,
+    "etiqueta": "Combo del mes",
+    "titulo": "Shaker Boom + Waffle de avena",
+    "descripcion": "Tu batida proteica favorita junto a un waffle de avena con granola.",
+    "precio": 400,
+    "precioAntes": 460,
+    "imagen": "assets/img/waffles.jpg"
+  }
+]

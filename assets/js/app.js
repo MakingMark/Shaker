@@ -163,37 +163,35 @@
     if (tile) openCategory(tile.dataset.cat);
   });
 
-  /* ---------------- Render ofertas ---------------- */
+  /* ---------------- Render ofertas ----------------
+     OFFERS viene de assets/data/offers.js, cargado como <script> (no fetch)
+     para que funcione también abriendo index.html directo, sin servidor. */
   const offersSection = $("#offersSection");
   const offersTrack = $("#offersTrack");
-  fetch("assets/data/offers.json")
-    .then((r) => (r.ok ? r.json() : []))
-    .then((offers) => {
-      const activas = (offers || []).filter((o) => o.activa);
-      if (!activas.length) return;
-      offersTrack.innerHTML = activas
-        .map(
-          (o) => `
-        <article class="offer-card">
-          ${o.etiqueta ? `<span class="offer-card__tag">${esc(o.etiqueta)}</span>` : ""}
-          ${o.imagen ? `<img src="${o.imagen}" alt="" loading="lazy">` : ""}
-          <div class="offer-card__body">
-            <h3>${esc(o.titulo)}</h3>
-            <p>${esc(o.descripcion || "")}</p>
-            <div class="offer-card__row">
-              <div class="offer-card__price">
-                <span class="offer-card__now">${fmt(o.precio)}</span>
-                ${o.precioAntes ? `<span class="offer-card__before">${fmt(o.precioAntes)}</span>` : ""}
-              </div>
-              <button type="button" class="offer-card__add" data-name="${esc(o.titulo)}" data-price="${o.precio}">Agregar</button>
+  const activeOffers = (typeof OFFERS !== "undefined" ? OFFERS : []).filter((o) => o.activa);
+  if (activeOffers.length) {
+    offersTrack.innerHTML = activeOffers
+      .map(
+        (o) => `
+      <article class="offer-card">
+        ${o.etiqueta ? `<span class="offer-card__tag">${esc(o.etiqueta)}</span>` : ""}
+        ${o.imagen ? `<img src="${o.imagen}" alt="" loading="lazy">` : ""}
+        <div class="offer-card__body">
+          <h3>${esc(o.titulo)}</h3>
+          <p>${esc(o.descripcion || "")}</p>
+          <div class="offer-card__row">
+            <div class="offer-card__price">
+              <span class="offer-card__now">${fmt(o.precio)}</span>
+              ${o.precioAntes ? `<span class="offer-card__before">${fmt(o.precioAntes)}</span>` : ""}
             </div>
+            <button type="button" class="offer-card__add" data-name="${esc(o.titulo)}" data-price="${o.precio}">Agregar</button>
           </div>
-        </article>`
-        )
-        .join("");
-      offersSection.hidden = false;
-    })
-    .catch(() => {});
+        </div>
+      </article>`
+      )
+      .join("");
+    offersSection.hidden = false;
+  }
 
   offersTrack?.addEventListener("click", (e) => {
     const btn = e.target.closest(".offer-card__add");

@@ -13,12 +13,16 @@ Y entra a `http://localhost:4173`. (Abrir `index.html` directo con doble clic ta
 ## Estructura
 
 ```
-index.html            Estructura de la página
-assets/css/styles.css Paleta, tipografía y todos los estilos
-assets/js/data.js     El menú completo y la configuración (WhatsApp, Instagram, textos)
-assets/js/app.js      Toda la lógica: acordeón, carrito, modificadores, checkout
-assets/img/           Fotos y logo, ya optimizados para web
+index.html              Estructura de la página
+assets/css/styles.css   Paleta, tipografía y todos los estilos
+assets/js/data.js       El menú completo y la configuración (WhatsApp, Instagram, textos)
+assets/js/app.js        Toda la lógica: acordeón, carrito, modificadores, checkout
+assets/data/offers.js   Ofertas activas (ver sección "Ofertas" más abajo)
+assets/data/taglines.json  Frases que rotan en el título del hero (opcional, ver más abajo)
+assets/img/             Fotos y logo, ya optimizados para web
 ```
+
+**Importante:** todo el contenido (`data.js`, `app.js`, `offers.js`) se carga como archivo `<script>` normal, no con `fetch()` — así el sitio funciona igual de bien abriendo `index.html` con doble clic que subido a un hosting. La única excepción es `taglines.json`, que si se sirve desde un servidor real permite variar las frases sin tocar código, pero si no está disponible el sitio usa una lista de respaldo ya incluida en `app.js`, así que nunca se ve vacío.
 
 ## Lo primero que debes revisar
 
@@ -44,6 +48,30 @@ Para agregar un producto nuevo, cópialo del mismo patrón que sus vecinos. Los 
 
 No hay servidor ni base de datos: todo pasa en el navegador del cliente, y el pedido llega como cualquier mensaje de WhatsApp normal.
 
+## Ofertas
+
+Viven en `assets/data/offers.js`, como una lista de objetos. Para publicar una oferta:
+
+1. Pon `"activa": true`.
+2. Llena `titulo`, `descripcion`, `precio`, y si quieres mostrar el precio anterior tachado, `precioAntes`.
+3. `imagen` es opcional — usa una ruta a una foto en `assets/img/`.
+
+Si no hay ninguna oferta con `"activa": true`, esa sección simplemente no aparece en la página — no hace falta borrar nada, con poner `false` alcanza.
+
+## Si editas cualquier archivo `.js` o `.css`
+
+Los navegadores guardan copia de estos archivos en caché y a veces no descargan la versión nueva aunque el archivo haya cambiado. Para forzar que se note el cambio, sube en uno el número de versión en `index.html`, en las líneas que dicen `?v=`, por ejemplo:
+
+```html
+<script src="assets/js/data.js?v=4"></script>
+```
+pasa a
+```html
+<script src="assets/js/data.js?v=5"></script>
+```
+
+Solo hace falta subirlo en el archivo que editaste.
+
 ## Diseño
 
 Paleta pensada para que combine con el logo y con las fotos reales del negocio (el papel de cuadros blanco y negro de los empaques se repite como franja decorativa entre el hero y el menú):
@@ -56,7 +84,7 @@ Paleta pensada para que combine con el logo y con las fotos reales del negocio (
 | `--coral` | `#FF5A36` | (igual) | Acento de alerta / animación al agregar |
 | `--wa-green` | `#25D366` | (igual) | Botones de WhatsApp |
 
-El tema oscuro se activa solo (según el sistema) o a mano con el botón ☀️/🌙 del header, y queda guardado para la próxima visita.
+Un solo tema (claro) en toda la página, sin selector — se decidió así a propósito para que se vea igual para todos.
 
 En pantallas grandes (≥960px) el carrito deja de ser una hoja inferior y se convierte en un panel fijo a la derecha, siempre visible mientras se navega el menú.
 

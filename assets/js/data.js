@@ -1,6 +1,6 @@
 /* Shaker DCN Nutrition — catálogo del menú
-   Fuente: menu.json del negocio, reorganizado en menos categorías para que el
-   menú no se sienta sobrecargado. Los precios están en pesos dominicanos (RD$).
+   Fuente: menú impreso de Shaker by DCN (octubre 2026), en pocas categorías
+   para que el menú no se sienta sobrecargado. Los precios están en pesos dominicanos (RD$).
    Para cambiar un precio o agregar un producto, edita este archivo.
    Las OFERTAS viven aparte, en assets/data/offers.json. */
 
@@ -23,65 +23,74 @@ const MENU = [
     tagline: "Para arrancar el día con energía",
     img: "assets/img/desayunos.jpg",
     modifierGroups: {
+      base: {
+        label: "Elige tu base",
+        type: "single",
+        required: true,
+        options: [
+          { name: "Puré de papa", price: 0 },
+          { name: "Puré de yautía", price: 0 },
+          { name: "Plátano maduro", price: 0 },
+          { name: "Batata hervida", price: 0 },
+        ],
+      },
       acompanante: {
         label: "Elige tu acompañante",
         type: "single",
         required: true,
         options: [
+          { name: "Chuleta", price: 0 },
+          { name: "Derretido de queso", price: 0 },
+          { name: "Omelette", price: 0 },
+          { name: "Salchichas", price: 0 },
           { name: "Huevo hervido", price: 0 },
-          { name: "Omelette de vegetales", price: 0 },
-          { name: "Chuleta al air fryer", price: 0 },
-          { name: "Salami artesanal", price: 0 },
-          { name: "Salchicha de desayuno", price: 0 },
-          { name: "Aguacate", price: 35 },
-          { name: "Queso", price: 0 },
+          { name: "Salami", price: 0 },
         ],
       },
-      extras: {
-        label: "Extras",
-        type: "multi",
-        required: false,
-        options: [{ name: "Bacon adicional", price: 65 }],
+      acompanante2: {
+        label: "Segundo acompañante",
+        type: "single",
+        required: true,
+        options: [
+          { name: "Chuleta", price: 0 },
+          { name: "Derretido de queso", price: 0 },
+          { name: "Omelette", price: 0 },
+          { name: "Salchichas", price: 0 },
+          { name: "Huevo hervido", price: 0 },
+          { name: "Salami", price: 0 },
+        ],
       },
     },
     subgroups: [
       {
-        label: "Platos fit — elige tu acompañante",
+        label: "Desayuno — elige tu base y acompañante",
         items: [
-          { name: "Plátano maduro", price: 175, modifiers: ["acompanante"] },
-          { name: "Batata", price: 175, modifiers: ["acompanante"] },
-          { name: "Puré de papa light", price: 175, modifiers: ["acompanante"] },
-          { name: "Puré de yautía", price: 175, modifiers: ["acompanante"] },
+          { name: "Desayuno con 1 acompañante", price: 175, modifiers: ["base", "acompanante"] },
+          { name: "Desayuno con 2 acompañantes", price: 200, modifiers: ["base", "acompanante", "acompanante2"] },
         ],
       },
       {
-        label: "Omelettes",
+        label: "Sándwiches",
         items: [
-          { name: "Huevo y vegetales", price: 125, modifiers: ["extras"] },
-          { name: "Huevo, vegetales y mozzarella", price: 175, modifiers: ["extras"] },
+          { name: "Sándwich de pollo", price: 175 },
+          { name: "Sándwich de res", price: 200 },
+          { name: "Sándwich de jamón de pavo y mozzarella", price: 150 },
+          { name: "Tostada", price: 100 },
         ],
       },
       {
-        label: "Sándwiches y pan francés",
+        label: "Waffles",
         items: [
-          { name: "Sándwich de pollo", price: 175, modifiers: ["extras"] },
-          { name: "Sándwich de carne de res", price: 200, modifiers: ["extras"] },
-          { name: "Sándwich de atún", price: 200, modifiers: ["extras"] },
-          { name: "Sándwich jamón, pavo y queso mozzarella", price: 150, modifiers: ["extras"] },
-          { name: "Sándwich jamón, queso y pollo o carne de res", price: 225, modifiers: ["extras"] },
-          { name: "Sándwich de pollo y huevo", price: 200, modifiers: ["extras"] },
-          { name: "Sándwich jamón, queso, huevo, pollo o carne de res", price: 250, modifiers: ["extras"] },
-          { name: "Tostadas", price: 100, modifiers: ["extras"] },
-          { name: "Pan integral", price: 100, modifiers: ["extras"] },
+          { name: "Waffle de huevo revuelto y salchichas", price: 175 },
+          { name: "Waffle de granola", price: 175 },
         ],
       },
       {
-        label: "Waffles y pancakes",
+        label: "Wraps",
         items: [
-          { name: "Waffle de avena con granola", price: 175 },
-          { name: "Waffle de avena (frutas)", price: 150 },
-          { name: "Waffle de avena (huevo revuelto y salchicha)", price: 175 },
-          { name: "Waffle de proteína (avena, frutas)", price: 200 },
+          { name: "Wrap de pollo", price: 250 },
+          { name: "Wrap de res", price: 300 },
+          { name: "Wrap de jamón de pavo y queso", price: 200 },
         ],
       },
     ],
@@ -100,51 +109,25 @@ const MENU = [
         required: true,
         options: [
           { name: "Batata", price: 0 },
-          { name: "Puré de papa light", price: 0 },
-          { name: "Vegetales salteados extra", price: 0 },
-          { name: "Yautía", price: 0 },
-          { name: "Papas al air fryer", price: 0 },
+          { name: "Papas a la air fryer", price: 0 },
           { name: "Plátano maduro", price: 0 },
         ],
       },
     },
     subgroups: [
       {
-        label: "Platos fuertes — elige tu guarnición",
+        label: "Platos fuertes — incluyen 1 guarnición y ensalada",
         items: [
-          { name: "Pechuga a la plancha con vegetales salteados", price: 350, modifiers: ["guarnicion"] },
-          { name: "Lomo de cerdo con vegetales salteados", price: 400, modifiers: ["guarnicion"] },
-          { name: "Filete de tilapia con vegetales salteados", price: 400, modifiers: ["guarnicion"] },
+          { name: "Carne molida", price: 350, modifiers: ["guarnicion"] },
+          { name: "Pechuga a la plancha", price: 350, modifiers: ["guarnicion"] },
+          { name: "Lomo de cerdo", price: 400, modifiers: ["guarnicion"] },
         ],
       },
       {
         label: "Otras opciones",
         items: [
           { name: "Canoa de plátano maduro", price: 300 },
-          { name: "Hamburguesa artesanal", price: 350 },
-          { name: "Hamburguesa en lechuga", price: 300 },
-          { name: "Yaroa ligera", price: 325 },
-          { name: "Wrap de pavo", price: 300 },
-          { name: "Ensalada César", price: 300 },
-        ],
-      },
-      {
-        label: "Wraps medianos",
-        items: [
-          { name: "Wrap mediano de queso y jamón de pavo", price: 150 },
-          { name: "Wrap mediano de res o pollo", price: 200 },
-          { name: "Wrap mediano de atún", price: 225 },
-          { name: "Wrap mediano de huevo, pollo o res", price: 250 },
-        ],
-      },
-      {
-        label: "Wraps grandes",
-        items: [
-          { name: "Wrap grande de pollo o res", price: 250 },
-          { name: "Wrap grande de atún", price: 300 },
-          { name: "Wrap grande de jamón, queso, pollo o res", price: 300 },
-          { name: "Wrap grande de queso, jamón, huevo, pollo o res", price: 325 },
-          { name: "Wrap grande tortilla de espinaca, pollo o res", price: 350 },
+          { name: "Ensalada de pollo", price: 300 },
         ],
       },
     ],
@@ -152,81 +135,68 @@ const MENU = [
 
   {
     id: "bebidas",
-    name: "Batidas y bebidas",
+    name: "Batidos y bebidas",
     icon: "🥤",
     tagline: "Para hidratarte y recargar",
     img: "assets/img/bebidas.jpg",
     modifierGroups: {
-      extras: {
-        label: "Agrega extras",
-        type: "multi",
-        required: false,
+      sabor: {
+        label: "Sabor de la proteína",
+        type: "single",
+        required: true,
         options: [
-          { name: "Frutas", price: 25 },
-          { name: "Avena", price: 25 },
-          { name: "Mantequilla de maní", price: 25 },
-          { name: "Creatina", price: 50 },
+          { name: "Vainilla", price: 0 },
+          { name: "Chocolate", price: 0 },
+          { name: "Cookie cream", price: 0 },
+        ],
+      },
+      fruta: {
+        label: "Elige 1 fruta",
+        type: "single",
+        required: true,
+        options: [
+          { name: "Guineo", price: 0 },
+          { name: "Fresa", price: 0 },
+          { name: "Lechosa", price: 0 },
+          { name: "Piña", price: 0 },
         ],
       },
     },
     subgroups: [
       {
-        label: "Batidas proteicas",
+        label: "Batido de proteína — incluye topping",
         items: [
-          { name: "Coco Paradise", price: 225, modifiers: ["extras"] },
-          { name: "Coffee Delight", price: 225, modifiers: ["extras"] },
-          { name: "Tropical Sunset", price: 225, modifiers: ["extras"] },
-          { name: "Cookie Crush", price: 225, modifiers: ["extras"] },
-          { name: "Shaker Boom", price: 260, modifiers: ["extras"] },
-          { name: "Shaker Muscle", price: 260, modifiers: ["extras"] },
+          { name: "Batido de proteína", price: 250, modifiers: ["sabor", "fruta"] },
         ],
       },
       {
-        label: "Batidos naturales",
+        label: "Batidos",
         items: [
-          { name: "Batido de fresa", price: 150, modifiers: ["extras"] },
-          { name: "Batido de guineo", price: 100, modifiers: ["extras"] },
-          { name: "Batido de zapote", price: 140, modifiers: ["extras"] },
-          { name: "Batido de ciruela", price: 150, modifiers: ["extras"] },
-          { name: "Batido de lechoza", price: 100, modifiers: ["extras"] },
-          { name: "Batido cerelac", price: 125, modifiers: ["extras"] },
-          { name: "Batido de mango", price: 100, modifiers: ["extras"] },
+          { name: "Batido de guineo", price: 100 },
+          { name: "Batido de lechosa", price: 110 },
+          { name: "Batido de zapote", price: 150 },
+          { name: "Batido de fresa", price: 150 },
+          { name: "Frappé de café", price: 275 },
         ],
       },
       {
-        label: "Frappé y café frío",
+        label: "Jugos naturales",
         items: [
-          { name: "Helado de vainilla o chocolate", price: 250 },
-          { name: "Café frío sin licuado", price: 175 },
+          { name: "Jugo de chinola", price: 80 },
+          { name: "Jugo de limón", price: 80 },
+          { name: "Jugo de fresa", price: 80 },
+          { name: "Jugo de naranja", price: 80 },
         ],
       },
       {
-        label: "Jugos y refrescos",
+        label: "Bebidas",
         items: [
-          { name: "Jugos naturales", price: 100 },
-          { name: "Jugo verde", price: 125 },
-          { name: "Frozen de fresa", price: 125 },
-          { name: "Frozen de piña limón", price: 100 },
           { name: "Agua", price: 25 },
+          { name: "Refresco", price: 40 },
           { name: "Bebida energética", price: 150 },
-          { name: "Coca Cola", price: 40 },
+          { name: "Café", price: 50 },
         ],
       },
-    ],
-  },
-
-  {
-    id: "aperitivos",
-    name: "Aperitivos",
-    icon: "🍓",
-    tagline: "Snacks ligeros y rápidos",
-    img: "assets/img/aperitivos.jpg",
-    items: [
-      { name: "Yogurt con frutas", price: 100 },
-      { name: "Yogurt con granola", price: 100 },
-      { name: "Yogurt mixto", price: 125 },
-      { name: "Barra de proteína", price: 75 },
-      { name: "Gelatina", price: 50 },
     ],
   },
 
@@ -236,40 +206,48 @@ const MENU = [
     icon: "🍔",
     tagline: "Cargado y especial, para darte un gusto",
     img: "assets/img/fat.jpg",
+    modifierGroups: {
+      proteina: {
+        label: "Pollo o res",
+        type: "single",
+        required: true,
+        options: [
+          { name: "Pollo", price: 0 },
+          { name: "Res", price: 0 },
+        ],
+      },
+      baseYaroa: {
+        label: "Papas o plátano maduro",
+        type: "single",
+        required: true,
+        options: [
+          { name: "Papas", price: 0 },
+          { name: "Plátano maduro", price: 0 },
+        ],
+      },
+    },
     subgroups: [
       {
         label: "Hamburguesas",
         items: [
           { name: "Hamburguesa clásica", price: 250 },
           { name: "Cheese burger", price: 275 },
-          { name: "Doble cheese burger", price: 325 },
-          { name: "Smash Alfred", price: 350 },
+          { name: "Doble carne", price: 350 },
           { name: "Smash Shaker", price: 300 },
-          { name: "Súper especial", price: 450 },
-        ],
-      },
-      {
-        label: "Yaroas y papas especiales",
-        items: [
-          { name: "Papas Alfred", price: 400 },
-          { name: "Papas Alfred con bacon caramelizado", price: 425 },
-          { name: "Yaroa normal mediana", price: 275 },
-          { name: "Yaroa normal grande", price: 375 },
         ],
       },
       {
         label: "Burritos",
         items: [
-          { name: "Burrito de pollo con bacon caramelizado", price: 350 },
-          { name: "Burrito Shaker", price: 325 },
-          { name: "Burrito de carne de res con mozzarella", price: 350 },
+          { name: "Burrito de pollo o res", price: 300, modifiers: ["proteina"] },
+          { name: "Quesadilla", price: 325 },
         ],
       },
       {
-        label: "Quesadillas",
+        label: "Yaroa",
         items: [
-          { name: "Quesadilla de pollo con mozzarella", price: 300 },
-          { name: "Quesadilla de res con mozzarella", price: 300 },
+          { name: "Yaroa mediana", price: 300, modifiers: ["proteina", "baseYaroa"] },
+          { name: "Yaroa grande", price: 400, modifiers: ["proteina", "baseYaroa"] },
         ],
       },
     ],
